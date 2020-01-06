@@ -407,6 +407,31 @@ windows_zipfile 'c:/foo/baz/the_codez.zip' do
 end
 ```
 
+### windows_disk_image
+
+Mounts an ISO or VHD to make its embedded files accessible.
+
+- `:mount` - Default. Mounts a Windows disk image. Upon success, the drive letter is added to `node.run_state[:mounted_images]['image_path']`, where `'image_path'` is the path to the image that was mounted, and its value is the drive letter it was mounted to.
+- `:dismount` - Dismounts a Windows disk image. Upon success, `node.run_state[:mounted_images]['image_path']` is updated, where `'image_path'` is the path to the image that was mounted, and is removed from `node.run_state[:mounted_images]`.
+
+#### Properties
+
+- `:image_path` - Name attribute. Path to the ISO or VHD which will be mounted or dismounted.
+
+#### Examples
+
+Mount an ISO, run the setup.exe contained on it, and dismount the image.
+
+```ruby
+windows_disk_image 'C:/someDisc.iso'
+
+execute "#{node.run_state[:mounted_images]['C:/someDisk.iso']}:/setup.exe"
+
+windows_disk_image 'C:/someDisc.iso'
+  action :dismount
+end
+```
+
 ## Libraries
 
 ### WindowsHelper
