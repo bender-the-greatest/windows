@@ -21,7 +21,7 @@
 
 resource_name :windows_disk_image
 
-property :image_path, String, required: true, name_property: true
+property :image_path, String, name_property: true
 
 node.run_state[:mounted_images] = {} if node.run_state[:mounted_images].nil?
 

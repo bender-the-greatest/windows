@@ -15,6 +15,6 @@ ruby_block 'Check for test.txt on mounted image' do
   action :run
 end
 
-windows_disk_image 'C:/imagetest/disktest.iso'
+windows_disk_image 'C:/imagetest/disktest.iso' do
   action :dismount
 end
